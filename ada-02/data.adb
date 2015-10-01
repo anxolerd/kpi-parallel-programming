@@ -126,6 +126,7 @@ package body Data is
     for row in value'range(1) loop
       for col in value'range(2) loop
         Put(value(row, col), 4);
+        Put(',');
       end loop;
       New_Line;
     end loop;
@@ -135,6 +136,7 @@ package body Data is
   begin
     for i in value'range(1) loop
       Put(value(i), 4);
+      Put(',');
     end loop;
   end;
 

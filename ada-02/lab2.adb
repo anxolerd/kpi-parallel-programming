@@ -23,7 +23,7 @@ procedure Lab2 is
     
     task T1 is
       pragma Storage_Size(32*SIZE*(SIZE + 3));
-      pragma Priority(6);
+      pragma Priority(7);
       pragma CPU(1);
     end T1;
     task body T1 is
@@ -35,6 +35,7 @@ procedure Lab2 is
       GetMatrix(MD);
       GetVector(A);
       GetVector(B);
+      delay 0.25;
       C := Func1(A, B, MA, MD);
       Put("C = A - B * (MA * MD) = ("); Put(C); Put_Line(")");
       Put_Line("Task T1 finished");
@@ -42,7 +43,7 @@ procedure Lab2 is
 
     task T2 is
       pragma Storage_Size(32*SIZE*SIZE);
-      pragma Priority(6);
+      pragma Priority(4);
       pragma CPU(2);
     end T2;
     task body T2 is
@@ -53,6 +54,7 @@ procedure Lab2 is
       GetMatrix(MK);
       GetMatrix(MM);
       o := Func2(MK, MM);
+      delay 0.000001;
       Put("o = Min(MK * MM) = "); Put(o, 2); New_Line;
       Put_Line("Task T2 finished");
     end T2;
@@ -71,6 +73,7 @@ procedure Lab2 is
       GetMatrix(MZ);
       GetVector(W);
       GetVector(X);
+      delay 0.5;
       T := Func3(MS, MZ, W, X);
       Put("T = (MS * MZ) * (W + X) = ("); Put(T); Put_Line(")");
       Put_Line("Task T3 finished");

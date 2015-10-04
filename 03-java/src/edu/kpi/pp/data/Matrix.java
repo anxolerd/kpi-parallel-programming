@@ -3,6 +3,10 @@ package edu.kpi.pp.data;
 
 public class Matrix {
 
+  public static double[][] ones(int size) {
+    return Matrix.ones(size, size);
+  }
+
   public static double[][] ones(int rows, int cols) {
     double[][] matrix = new double[rows][cols];
     for (int r = 0; r < rows; r++)
@@ -105,6 +109,17 @@ public class Matrix {
       }
     }
     return min;
+  }
+
+  public static String toString(double[][] matrix) {
+    StringBuffer sb = new StringBuffer();
+    for (double[] row : matrix) {
+      for (double value: row) {
+        sb.append(String.format("%10.2f,", value));
+      }
+      sb.append('\n');
+    }
+    return sb.toString();
   }
 
 }

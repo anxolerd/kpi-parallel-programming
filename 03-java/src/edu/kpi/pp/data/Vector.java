@@ -49,4 +49,13 @@ public class Vector {
     return Matrix.multiply(left, right);
   }
 
+  public static String toString(double[] vector) {
+    StringBuffer sb = new StringBuffer();
+    for (double value: vector) {
+      sb.append(String.format("%10.2f,", value));
+    }
+    sb.append('\n');
+    return sb.toString();
+  }
+
 }

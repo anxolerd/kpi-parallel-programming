@@ -2,7 +2,20 @@ package edu.kpi.pp;
 
 import edu.kpi.pp.threading.TaskThreadGenerator;
 
-
+/**
+ * Parallel programming
+ * Lab 3
+ *
+ * Functions:
+ * F1: C := A - B * (MA * MD)
+ * F2: o := Min(MK * MM)
+ * F3: T := (MS * MZ) * (W + X)
+ *
+ * @since 2015-10-04
+ * @author Olexandr Kovalchuk
+ * IP-32
+ *
+ */
 public class Lab3 {
   public static void main(String[] args) throws InterruptedException {
     int size = 4;

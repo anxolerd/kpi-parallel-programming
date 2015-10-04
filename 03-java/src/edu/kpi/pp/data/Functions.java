@@ -5,7 +5,7 @@ import edu.kpi.pp.data.Matrix;
 import edu.kpi.pp.data.Vector;
 
 
-class Functions {
+public class Functions {
   public static double[] func1(double[] a, double[] b, double[][] ma, double[][] md) {
     return (
       Vector.substract(

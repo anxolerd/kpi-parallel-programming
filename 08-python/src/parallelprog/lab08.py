@@ -12,47 +12,44 @@ F3: T := (MS * MZ) * (W + X)
 IP-32
 """
 from multiprocessing import Process
-import logging
+from contextlib import contextmanager
 import os
+import logging
 
 from data import func1, func2, func3, make_sq_matrix, make_vector
 
 
-def verbose(f):
-    def _wrapper(*args, **kwargs):
-        det = kwargs.get('det', args[0] if args else 0)
-        pid = os.getpid()
-        logging.info('Task %s in process %s started', det, pid)
-        result = f(*args, **kwargs)
-        logging.info('Task %s in process %s finished', det, pid)
-        return result
-
-    return _wrapper
+@contextmanager
+def verbose(det):
+    pid = os.getpid()
+    logging.info('Task %s in process %s started', det, pid)
+    yield
+    logging.info('Task %s in process %s finished', det, pid)
 
 
-@verbose
 def task(det, size=4):
     assert 1 <= det <= 3
     assert size > 0
 
-    if det == 1:
-        ma = make_sq_matrix(size)
-        md = make_sq_matrix(size)
-        a = make_vector(size)
-        b = make_vector(size)
-        result = func1(a, b, ma, md)
-    elif det == 2:
-        mk = make_sq_matrix(size)
-        mm = make_sq_matrix(size)
-        result = func2(mk, mm)
-    elif det == 3:
-        w = make_vector(size)
-        x = make_vector(size)
-        ms = make_sq_matrix(size)
-        mz = make_sq_matrix(size)
-        result = func3(ms, mz, w, x)
-    if (size < 8):
-        print('task %s: %s' % (det, result))
+    with verbose(det):
+        if det == 1:
+            ma = make_sq_matrix(size)
+            md = make_sq_matrix(size)
+            a = make_vector(size)
+            b = make_vector(size)
+            result = func1(a, b, ma, md)
+        elif det == 2:
+            mk = make_sq_matrix(size)
+            mm = make_sq_matrix(size)
+            result = func2(mk, mm)
+        elif det == 3:
+            w = make_vector(size)
+            x = make_vector(size)
+            ms = make_sq_matrix(size)
+            mz = make_sq_matrix(size)
+            result = func3(ms, mz, w, x)
+        if (size < 8):
+            print('task %s: %s' % (det, result))
 
 
 def runapp(sz):
@@ -65,6 +62,6 @@ def runapp(sz):
 
 
 if __name__ == '__main__':
-    logging.getLogger().setLevel(logging.NOTSET)
+    logging.getLogger().setLevel(logging.DEBUG)
     sz = 1000
     runapp(sz)
